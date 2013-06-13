@@ -49,9 +49,13 @@ class DefaultSiteLoginPageMixin(object):
         from django.contrib.sites.admin import SiteAdmin
         from django.contrib.sites.models import Site
         # django.contrib.sites
-        site.register(Site, SiteAdmin)
+        self.register(Site, SiteAdmin)
 
 
 class DefaultSiteLoginPageAdminSite(
         DefaultSiteLoginPageMixin,
         admin.AdminSite):
+    """
+    An AdminSite implementation which delegates to the default login
+    view to log in to the admin site.
+    """
