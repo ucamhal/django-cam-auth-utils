@@ -9,6 +9,7 @@ used at Cambridge University.
   shib users.
 """
 
+from django.conf import settings
 from django.contrib import auth
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.shortcuts import resolve_url
