@@ -12,13 +12,25 @@ used at Cambridge University.
 from django.contrib import auth
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.shortcuts import resolve_url
+from django.utils.cache import add_never_cache_headers
 from django.utils.http import is_safe_url
 from django.views.generic import RedirectView
 
 from braces.views import LoginRequiredMixin, StaffuserRequiredMixin
 
 
-class RemoteUserLoginView(RedirectView):
+class NeverCacheMixin(object):
+    """
+    A View mixin which marks the response as not cachable by setting
+    appropreate headers.
+    """
+    def dispatch(self, *args, **kwargs):
+        response = super(NeverCacheMixin, self).dispatch(*args, **kwargs)
+        add_never_cache_headers(response)
+        return response
+
+
+class RemoteUserLoginView(NeverCacheMixin, RedirectView):
     """
     Handles logging in users when they hit a url which is protected by
     the webserver we're running in. The webserver needs to provide a
@@ -33,6 +45,7 @@ class RemoteUserLoginView(RedirectView):
 
     RemoteUserBackend should be present in AUTHENTICATION_BACKENDS.
     """
+    permanent = False
 
     header = "REMOTE_USER"
 
