@@ -28,11 +28,23 @@ setup(
     version=get_version("django_cam_auth_utils/__init__.py"),
     description=get_readme_text(),
     author="Hal Blackburn",
-    author_email="hal@caret.cam.ac.uk",
+    author_email="hwtb2@cam.ac.uk",
+    url="https://github.com/ucamhal/django-cam-auth-utils",
     packages=["django_cam_auth_utils"],
-    zip_safe=False,
     install_requires=[
         "django>=1.5",
         "django-braces"
+    ],
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Framework :: Django",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        'License :: OSI Approved :: BSD License'
     ]
 )
